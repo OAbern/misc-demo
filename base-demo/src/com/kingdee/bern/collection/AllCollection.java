@@ -9,6 +9,8 @@ import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.PriorityQueue;
+import java.util.Queue;
 import java.util.Set;
 import java.util.Stack;
 import java.util.TreeMap;
@@ -22,9 +24,11 @@ import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.LinkedBlockingQueue;
 
+import javax.management.Query;
+
 /**
  * 列出基本常用的容器
- * 注意观察容器的继承体系，以及查看容器的源码
+ * <p>注意观察容器的继承体系，以及查看容器的源码
  * @author sola
  *
  */
@@ -52,6 +56,9 @@ public class AllCollection {
 		HashSet<String> hashSet;
 		LinkedHashSet<String> linkedHashSet;
 		TreeSet<String> treeSet;
+		
+		Queue queue;
+		PriorityQueue<String> priorityQueue;
 		
 		//并发容器
 		ConcurrentHashMap<String, Object> concurrentHashMap;
