@@ -5,6 +5,8 @@ import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.List;
 
+import com.kingdee.bern.util.PrintUtil;
+
 /**
  * 演示arraylist产生ConcurrentModificationException
  * @author sola
@@ -25,7 +27,7 @@ public class ArrayListCME {
 		t1.start();
 		
 		try {
-			Thread.sleep(5000);
+			Thread.sleep(2000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -38,7 +40,7 @@ public class ArrayListCME {
 		t1.start();
 		
 		try {
-			Thread.sleep(5000);
+			Thread.sleep(2000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -62,7 +64,7 @@ class Travl_1 implements Runnable {
 		Iterator<Integer> it = list.iterator();
 		while(it.hasNext()){
 			try {
-				Thread.sleep(1000);
+				Thread.sleep(500);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -71,6 +73,7 @@ class Travl_1 implements Runnable {
 			} catch(ConcurrentModificationException e) {
 				System.out.println(e);
 				System.out.println("Travl1----Iter遍历结束");
+				PrintUtil.printBorder();
 				return;
 			}
 		}
@@ -92,12 +95,19 @@ class Travl_2 implements Runnable {
 		int size = list.size();
 		for(int i=0; i<size; i++) {
 			try {
-				Thread.sleep(1000);
+				Thread.sleep(500);
 			} catch (InterruptedException e) {
-				e.printStackTrace();
+				System.out.println(e);
 			}
-			System.out.println("Travl2普通遍历:"+list.get(i));
+			try {
+				System.out.println("Travl2普通遍历:"+list.get(i));
+			}catch(IndexOutOfBoundsException e) {
+				System.out.println(e);
+				PrintUtil.printBorder();
+				return;
+			}
 		}
+		
 	}
 	
 }

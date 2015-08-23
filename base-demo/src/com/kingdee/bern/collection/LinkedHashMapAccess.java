@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 
+import com.kingdee.bern.util.PrintUtil;
+
 public class LinkedHashMapAccess {
 	public static void main(String[] args) {
 		String[] strings = {"aaa","bbb","ccc","ddd","eee"};
@@ -29,7 +31,7 @@ public class LinkedHashMapAccess {
 		while(it.hasNext()) {
 			System.out.println(it.next());
 		}
-		System.out.println("*****************华丽丽的分割线*******************");
+		PrintUtil.printBorder();
 	}
 	
 	/**
@@ -48,7 +50,7 @@ public class LinkedHashMapAccess {
 		while(it.hasNext()) {
 			System.out.println(it.next());
 		}
-		System.out.println("*****************华丽丽的分割线*******************");
+		PrintUtil.printBorder();
 	}
 	
 	/**
@@ -69,6 +71,6 @@ public class LinkedHashMapAccess {
 		while(it.hasNext()) {
 			System.out.println(it.next());
 		}
-		System.out.println("*****************华丽丽的分割线*******************");
+		PrintUtil.printBorder();
 	}
 }
