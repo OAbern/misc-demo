@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:tx="http://www.springframework.org/schema/tx"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	   http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+		<property name="url" value="jdbc:mysql://localhost:3306/world"/>
+		<property name="username" value="root"/>
+		<property name="password" value="zbj123"/>
+		<property name="initialSize" value="5"/>
+		<property name="minIdle" value="5"/>
+		<property name="maxActive" value="10"/>
+		<property name="timeBetweenEvictionRunsMillis" value="10000"/>
+		<property name="minEvictableIdleTimeMillis" value="20000"/>
+		<property name="validationQuery" value="SELECT 'x'"/>
+		<property name="testWhileIdle" value="false"/>
+		<property name="testOnBorrow" value="true"/>
+		<property name="testOnReturn" value="false"/>
+		<property name="removeAbandoned" value="true"/>
+		<property name="removeAbandonedTimeout" value="1800"/>
+		<property name="logAbandoned" value="true"/>
+		<property name="filters" value="stat"/>
+		<property name="connectionProperties" value="druid.stat.slowSqlMillis=100"/>
+	</bean>
+
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"/>
+		<!--<property name="configLocation" value="classpath:mybatis/config/mybatis-config-merchant.xml"/>-->
+		<property name="mapperLocations" value="classpath:sqlmap/*Mapper.xml" />
+		<!--<property name="mapperLocations" value="classpath:*Mapper.xml" />-->
+	</bean>
+
+	<!-- 自动扫描 将Dao层接口生成代理类注入到Spring -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.zhubajie.oabern.dal" />
+		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+	</bean>
+
+	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg index="0" ref="sqlSessionFactory"/>
+	</bean>
+
+	<!--<bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">-->
+		<!--<property name="dataSource" ref="dataSource"/>-->
+	<!--</bean>-->
+
+</beans>
