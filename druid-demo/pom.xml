@@ -172,7 +172,7 @@
 						<!--</systemProperty>-->
 					<!--</systemProperties>-->
 					<scanIntervalSeconds>10</scanIntervalSeconds>
-					<!--<reload>automatic</reload>-->
+					<reload>automatic</reload>
 					<scanTargetPatterns>
 						<scanTargetPattern>
 							<directory>src/main</directory>

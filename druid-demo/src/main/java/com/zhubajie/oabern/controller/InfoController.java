@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.zhubajie.oabern.bean.City;
 import com.zhubajie.oabern.dal.CityMapper;
+import com.zhubajie.oabern.robot.SQLExector;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,6 +21,8 @@ import java.util.List;
 @Controller
 @RequestMapping("/info")
 public class InfoController {
+    @Resource
+    public SQLExector sqlExector;
 
     @Resource
     public CityMapper cityMapper;
@@ -44,6 +47,16 @@ public class InfoController {
         } finally {
             response.getWriter().close();
         }
-
     }
+
+    @RequestMapping("/job")
+    public void doSQLJob(HttpServletResponse response)throws IOException {
+        sqlExector.execute();
+        try {
+            response.getWriter().write("SQLExector is doing job!");
+        } finally {
+            response.getWriter().close();
+        }
+    }
+
 }
