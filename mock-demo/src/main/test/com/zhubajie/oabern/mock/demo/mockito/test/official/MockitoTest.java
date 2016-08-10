@@ -1,8 +1,11 @@
 package com.zhubajie.oabern.mock.demo.mockito.test.official;
 
 import com.zhubajie.oabern.mock.demo.entity.Flower;
+import com.zhubajie.oabern.mock.demo.entity.Scheduler;
 import org.junit.Test;
+import org.mockito.ArgumentMatcher;
 
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -87,22 +90,55 @@ public class MockitoTest {
 
     @Test
     public void shouldStubMethodAndCallRealNotStubbedMethod(){
+        // arrange
         final int NEW_NUMBER_OF_LEAFS = 10;
-
         Flower realFlower = new Flower();
-
         realFlower.setNumberOfLeafs(Flower.ORIGINAL_NUMBER_OF_LEAFS);
-
-        Flower flowerSpy = spy(realFlower);
-
+        Flower flowerSpy = spy(realFlower);     //spy
         willDoNothing().given(flowerSpy).setNumberOfLeafs(anyInt());
 
-        flowerSpy.setNumberOfLeafs(NEW_NUMBER_OF_LEAFS);//stubbed‚should do nothing
+        // act
+        flowerSpy.setNumberOfLeafs(NEW_NUMBER_OF_LEAFS);    //stubbed‚should do nothing
 
+        // assert
         verify(flowerSpy).setNumberOfLeafs(NEW_NUMBER_OF_LEAFS);
 
         assertEquals(flowerSpy.getNumberOfLeafs(),Flower.ORIGINAL_NUMBER_OF_LEAFS);    //value was not changed
 
+    }
+
+    @Test
+    public void testCustomArgumentMatcher() {
+        final int NUM = 1;
+        final Date date = new Date();
+        final int hour = date.getHours();
+
+        Scheduler schedulerMock = mock(Scheduler.class);
+        given(schedulerMock.getNumberOfPlantsScheduledOnDate(
+                argThat(haveHourFieldEqualTo(hour)))).willReturn(NUM);
+
+        int actual = schedulerMock.getNumberOfPlantsScheduledOnDate(new Date());
+
+        verify(schedulerMock).getNumberOfPlantsScheduledOnDate(any());
+        assertEquals(NUM, actual);
+    }
+
+    /**
+     * with the util method to create a matcher
+     * return custom ArgumentMatcher
+     * @param hour
+     * @return
+     */
+    private ArgumentMatcher haveHourFieldEqualTo(final int hour) {
+
+        return new ArgumentMatcher() {
+
+            @Override
+            public boolean matches(Object argument) {
+                return ((Date) argument).getHours() == hour;
+            }
+
+        };
     }
 
 }
