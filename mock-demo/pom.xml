@@ -9,6 +9,7 @@
   <name>mock-demo</name>
 
   <properties>
+    <powermock.version>1.6.4</powermock.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
@@ -21,11 +22,25 @@
       <scope>test</scope>
     </dependency>
 
-    <!-- mockito 2016.8.8目前1.*为稳定版 2.*为beta -->
+    <!-- Mockito 2016.8.8目前1.*为稳定版 2.*为beta -->
     <dependency>
       <groupId>org.mockito</groupId>
       <artifactId>mockito-core</artifactId>
       <version>1.10.19</version>
+      <scope>test</scope>
+    </dependency>
+
+    <!-- PowerMock  -->
+    <dependency>
+      <groupId>org.powermock</groupId>
+      <artifactId>powermock-module-junit4</artifactId>
+      <version>${powermock.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.powermock</groupId>
+      <artifactId>powermock-api-mockito</artifactId>
+      <version>${powermock.version}</version>
       <scope>test</scope>
     </dependency>
   </dependencies>

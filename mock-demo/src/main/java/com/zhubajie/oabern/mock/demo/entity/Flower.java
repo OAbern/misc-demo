@@ -14,4 +14,8 @@ public class Flower {
     public void setNumberOfLeafs(int numberOfLeafs) {
         this.numberOfLeafs = numberOfLeafs;
     }
+
+    public void doSelfCheck() {
+        // do something
+    }
 }

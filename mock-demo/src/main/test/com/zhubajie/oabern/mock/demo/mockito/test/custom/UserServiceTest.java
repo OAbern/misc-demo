@@ -19,10 +19,12 @@ import static org.mockito.BDDMockito.*;
 import static org.junit.Assert.*;
 
 /**
+ * 实际使用简单示例
  * Created by fengdi on 2016/8/9.
  */
 @RunWith(MockitoJUnitRunner.class)
 public class UserServiceTest {
+    //UserDao is just a interface
     @Mock
     UserDao userDaoMock;
 
@@ -39,7 +41,7 @@ public class UserServiceTest {
 
     @BeforeClass
     public static void setUp() {
-
+        //TODO
     }
 
     @Test

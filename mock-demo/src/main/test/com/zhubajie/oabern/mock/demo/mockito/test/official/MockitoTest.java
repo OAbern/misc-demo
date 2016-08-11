@@ -17,7 +17,7 @@ import static org.mockito.BDDMockito.*;
 import static org.junit.Assert.*;
 
 /**
- * the code is based on the offical demo from <a href="http://site.mockito.org/">Mockito</a>
+ * the code is based on the official demo from <a href="http://site.mockito.org/">Mockito</a>
  *
  * Created by fengdi on 2016/8/8.
  */
@@ -115,7 +115,7 @@ public class MockitoTest {
 
         Scheduler schedulerMock = mock(Scheduler.class);
         given(schedulerMock.getNumberOfPlantsScheduledOnDate(
-                argThat(haveHourFieldEqualTo(hour)))).willReturn(NUM);
+                argThat(haveHourFieldEqualTo(hour)))).willReturn(NUM);      //use argThat(.) and give the custom argument matcher
 
         int actual = schedulerMock.getNumberOfPlantsScheduledOnDate(new Date());
 
@@ -139,6 +139,19 @@ public class MockitoTest {
             }
 
         };
+    }
+
+    @Test
+    public void throwException() {
+        Flower flowerMock = mock(Flower.class);
+        given(flowerMock.getNumberOfLeafs()).willThrow(new NullPointerException());
+        try {
+            flowerMock.getNumberOfLeafs();
+        } catch (NullPointerException e) {
+            System.out.println("got NullException!");
+        }
+
+        verify(flowerMock).getNumberOfLeafs();
     }
 
 }
